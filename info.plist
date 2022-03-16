@@ -8,6 +8,19 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
 		<array>
 			<dict>
@@ -22,11 +35,31 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>68F46998-E614-4EFE-908E-FC676751E653</string>
+				<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with a system paste</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -42,6 +75,46 @@
 	<string>2FA Code from Messages</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{query}' copied to clipboard</string>
+				<key>title</key>
+				<string>Code copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -94,27 +167,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{query}' copied to clipboard</string>
-				<key>title</key>
-				<string>Code copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -122,12 +174,54 @@
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>68F46998-E614-4EFE-908E-FC676751E653</string>
+			<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>osascript -e 'tell application "System Events" to keystroke the clipboard as text'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -136,12 +230,14 @@
 	<string>Icon made by www.flaticon.com/authors/freepik from www.flaticon.com.</string>
 	<key>uidata</key>
 	<dict>
-		<key>68F46998-E614-4EFE-908E-FC676751E653</key>
+		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
 		<dict>
+			<key>note</key>
+			<string>Method 1: AppleScript paste to simulate keystrokes</string>
 			<key>xpos</key>
-			<integer>370</integer>
+			<integer>475</integer>
 			<key>ypos</key>
-			<integer>295</integer>
+			<integer>370</integer>
 		</dict>
 		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
 		<dict>
@@ -153,15 +249,40 @@
 		<key>CEBD08AD-93B2-4317-939A-49E805C90AA1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>365</integer>
+			<integer>330</integer>
 			<key>ypos</key>
-			<integer>170</integer>
+			<integer>30</integer>
+		</dict>
+		<key>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</key>
+		<dict>
+			<key>xpos</key>
+			<integer>635</integer>
+			<key>ypos</key>
+			<integer>370</integer>
+		</dict>
+		<key>E819A847-A36C-4867-AACD-CFFCFB59B5A9</key>
+		<dict>
+			<key>note</key>
+			<string>Method 2: Alfred paste</string>
+			<key>xpos</key>
+			<integer>195</integer>
+			<key>ypos</key>
+			<integer>440</integer>
+		</dict>
+		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
+		<dict>
+			<key>note</key>
+			<string>Only copy to clipboard</string>
+			<key>xpos</key>
+			<integer>330</integer>
+			<key>ypos</key>
+			<integer>140</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
 	<dict>
 		<key>lookBackMinutes</key>
-		<string>1440</string>
+		<string>720</string>
 	</dict>
 	<key>version</key>
 	<string>1.0</string>
