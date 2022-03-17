@@ -19,7 +19,7 @@ if [[ "$1" == "--test" ]]; then
 	echo "Running in test mode."
 	response=`cat test_messages.txt`
 else
-	>&2 echo "Lookback minutes: $lookBackMinutes"
+	# >&2 echo "Lookback minutes: $lookBackMinutes"
 
 	sqlQuery="select
 		message.rowid,
@@ -53,7 +53,7 @@ else
 	# >&2 echo "SQL Query: $sqlQuery"
 
 	response=$(sqlite3 ~/Library/Messages/chat.db -json "$sqlQuery")
-	>&2 echo "SQL Results: '$response'"
+	# >&2 echo "SQL Results: '$response'"
 fi
 
 
@@ -109,5 +109,5 @@ else
 	output+=']}'
 fi
 
->&2 echo "Final Output: '$output'"
+# >&2 echo "Final Output: '$output'"
 echo -e $output
