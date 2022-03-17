@@ -2,11 +2,9 @@ name: Create alfred workflow
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - v*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,7 +18,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3.0.0
       
       - name: Create the alfredworkflow zip file
         uses: TheDoctor0/zip-release@0.6.1
@@ -30,12 +29,12 @@ jobs:
           path: .
           directory: .
           # List of excluded files / directories
-          exclusions: workflows test*
+          exclusions: '.github test*'
           type: zip
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "alfred-imessage-2fa-copy.alfredworkflow"
-          # bodyFile: "body.md"
+          bodyFile: "body.md"
           token: ${{ secrets.GITHUB_TOKEN }}
