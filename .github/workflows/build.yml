@@ -29,12 +29,12 @@ jobs:
           path: .
           directory: .
           # List of excluded files / directories
-          exclusions: '.github\* .git\* test*'
+          exclusions: '.github/* .git/* test*'
           type: zip
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "alfred-imessage-2fa-copy.alfredworkflow"
-          bodyFile: "body.md"
+          bodyFile: "release_notes.md"
           token: ${{ secrets.GITHUB_TOKEN }}
