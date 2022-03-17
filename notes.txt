@@ -1,4 +1,0 @@
-
-Enhancement
------------
-Differentiate unread messages.
