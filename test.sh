@@ -29,7 +29,8 @@ while [[ $valid_response_index -lt ${#valid_responses[@]} ]]; do
         
         if [[ $valid_response != $received_code ]]; then
             test_results+="<testcase classname=\"get_codes.sh\" name=\"line$valid_response_index\" time=\"0\">
-                <failure message=\"Expected '$valid_response', but received '$received_code'\" type=\"\"/>\n</testcase>\n"
+                <failure message=\"invalid code\" type=\"invalidCode\">Expected '$valid_response', but received '$received_code'</failure>
+                </testcase>\n"
             printf "$valid_response_index: \xE2\x9D\x8C $valid_response != $received_code for $received_response\n"
             let "failures+=1"
         else
@@ -37,9 +38,11 @@ while [[ $valid_response_index -lt ${#valid_responses[@]} ]]; do
             printf "$valid_response_index: \xE2\x9C\x85 $valid_response = $received_code\n"
         fi
     else
+        message="Could not find 'arg' field in item: '$received_response'"
         test_results+="<testcase classname=\"get_codes.sh\" name=\"line$valid_response_index\" time=\"0\">
-            <failure message=\"Could not find 'arg' in item: '$received_response'\" type=\"\"/></testcase>\n"
-        printf "$valid_response_index: \xE2\x9D\x8C Could not find 'arg' field in item: '$received_response'\n"
+            <failure message=\"invalid message\" type=\"invalidMessage\">$message</failure>
+            </testcase>\n"
+        printf "$valid_response_index: \xE2\x9D\x8C $message\n"
         let "errors+=1"
     fi
     
@@ -56,8 +59,8 @@ fi
 
 iso8601date=`date -u +%Y-%m-%dT%H:%M:%S`
 printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuites><testsuite name=\"get_codes.sh\" package=\"alfred-copy\" timestamp=\"$iso8601date\" hostname=\"localhost\" time=\"0\"
-    tests=\"${#valid_responses[@]}\" errors=\"$errors\" failures=\"$failures\">\n$test_results
-</testsuite></testsuites>" > "test_results.xml"
+<testsuite name=\"get_codes.sh\" hostname=\"localhost\" time=\"0\" timestamp=\"$iso8601date\"
+    tests=\"${#valid_responses[@]}\" errors=\"$errors\" failures=\"$failures\" skipped=\"0\">\n$test_results
+</testsuite>" > "test_results.xml"
 
 # test_results+="<testsuite name=\"get_codes.sh\" tests=\"${#valid_responses[@]}\" failures=\"$failures\" time=\"0\">\n$test_results</testsuite>"
