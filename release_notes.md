@@ -1,2 +1,1 @@
-* Removing debug output.
-* Testing github action to publish new release.
+* Now accounting for double quotes in messages.
