@@ -27,7 +27,6 @@ jobs:
       - name: Report
         uses: dorny/test-reporter@v1.5.0
         with:
-          name: Simple Tests
           path: test_results.xml
           reporter: java-junit
           fail-on-error: true

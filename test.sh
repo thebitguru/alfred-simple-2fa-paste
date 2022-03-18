@@ -28,8 +28,12 @@ while [[ $valid_response_index -lt ${#valid_responses[@]} ]]; do
         received_code=${BASH_REMATCH[1]}
         
         if [[ $valid_response != $received_code ]]; then
+            escaped=${received_response//</&lt;}
+            escaped=${escaped//&/&amp;}
+            escaped=${escaped//>/&gt;}
+            escaped=${escaped//\"/&quot;}
             test_results+="<testcase classname=\"get_codes.sh\" name=\"line$valid_response_index\" time=\"0\">
-                <failure message=\"invalid code\" type=\"invalidCode\">Expected '$valid_response', but received '$received_code'</failure>
+                <failure message=\"invalid code\" type=\"invalidCode\">Expected '$valid_response', but received '$received_code' for $escaped</failure>
                 </testcase>\n"
             printf "$valid_response_index: \xE2\x9D\x8C $valid_response != $received_code for $received_response\n"
             let "failures+=1"
@@ -39,8 +43,12 @@ while [[ $valid_response_index -lt ${#valid_responses[@]} ]]; do
         fi
     else
         message="Could not find 'arg' field in item: '$received_response'"
+        escaped=${message//</&lt;}
+        escaped=${escaped//&/&amp;}
+        escaped=${escaped//>/&gt;}
+        escaped=${escaped//\"/&quot;}
         test_results+="<testcase classname=\"get_codes.sh\" name=\"line$valid_response_index\" time=\"0\">
-            <failure message=\"invalid message\" type=\"invalidMessage\">$message</failure>
+            <failure message=\"invalid message\" type=\"invalidMessage\">$escaped</failure>
             </testcase>\n"
         printf "$valid_response_index: \xE2\x9D\x8C $message\n"
         let "errors+=1"
@@ -56,11 +64,8 @@ else
     printf "\033[0;31m$failures failures, $errors errors.\n"
 fi
 
-
 iso8601date=`date -u +%Y-%m-%dT%H:%M:%S`
 printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuite name=\"get_codes.sh\" hostname=\"localhost\" time=\"0\" timestamp=\"$iso8601date\"
+<testsuite name=\"get_codes.sh\" hostname=\"$HOSTNAME\" time=\"0\" timestamp=\"$iso8601date\"
     tests=\"${#valid_responses[@]}\" errors=\"$errors\" failures=\"$failures\" skipped=\"0\">\n$test_results
 </testsuite>" > "test_results.xml"
-
-# test_results+="<testsuite name=\"get_codes.sh\" tests=\"${#valid_responses[@]}\" failures=\"$failures\" time=\"0\">\n$test_results</testsuite>"
