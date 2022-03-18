@@ -1,1 +1,1 @@
-* Now accounting for double quotes in messages.
+* Reduced the update check frequency to 5 days from everytime.

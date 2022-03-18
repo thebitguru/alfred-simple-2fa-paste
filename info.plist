@@ -186,7 +186,7 @@
 readonly remote_info_plist='https://raw.githubusercontent.com/thebitguru/alfred-imessage-2fa-copy/master/info.plist'
 readonly workflow_url='thebitguru/alfred-imessage-2fa-copy'
 readonly download_type='github_release'
-readonly frequency_check='0'
+readonly frequency_check='5'
 
 # FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
 function abort {
@@ -397,7 +397,7 @@ fi</string>
 		<string>720</string>
 	</dict>
 	<key>version</key>
-	<string>0.4</string>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/thebitguru/alfred-imessage-2fa-copy</string>
 </dict>
