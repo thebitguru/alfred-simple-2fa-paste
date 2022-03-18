@@ -12,7 +12,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  test:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -23,3 +23,11 @@ jobs:
       
       - name: Run test
         run: ./test.sh
+
+      - name: Report
+        uses: dorny/test-reporter@v1.5.0
+        with:
+          name: Simple Tests
+          path: test_results.xml
+          reporter: java-junit
+          fail-on-error: true

@@ -6,10 +6,8 @@
 #     --newline: Print a newline after the output.
 #  To keep the script simple, the arguments are expected to be in these exact positions.
 
-# TODO: Fix the case with double quotes in the "text" field.
-ROW_REGEX='^\[?{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)","message_date"\:"([^"]+)","text"\:"([^"]+)"}'
+ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)","message_date"\:"([^"]+)","text"\:"([[:print:]][^\\]+)"\}.*$'
 
-# NUMBER_MATCH_RE='^(.*[^[:digit:]]([[:digit:]]{3,})[^[:digit:]]).*$'
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
 output=''
@@ -61,21 +59,21 @@ if [[ -z "$response" ]]; then
 	output+="{\"items\":[{\"type\":\"default\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"\", \"subtitle\": \"Searched messages in the last $lookBackMinutes minutes.\", \"title\": \"No codes found\"}]}"
 else
 	while read line; do
-		# echo "Line: $line"
+		#>&2 echo "Line: $line"
 		if [[ $line =~ $ROW_REGEX ]]; then
 		 	sender=${BASH_REMATCH[2]}
 			message_date=${BASH_REMATCH[4]}
 			message=${BASH_REMATCH[5]}
-			# echo " Found sender: $sender"
-			# echo " Found message_date: $message_date"
-			# echo " Found message: $message"
+			#>&2 echo " Found sender: $sender"
+			#>&2 echo " Found message_date: $message_date"
+			#>&2 echo " Found message: $message"
 
 			remaining_message=$message
 			message_quoted=${message//[\"]/\\\"}
 
 			while [[ $remaining_message =~ $NUMBER_MATCH_REGEX ]]; do
-				# echo " -- Message: $message"
-				# echo " -- Found-1 ${BASH_REMATCH[1]}"
+				# >&2 echo " -- Message: $message"
+				# >&2 echo " -- Found-1 ${BASH_REMATCH[1]}"
 				code=${BASH_REMATCH[1]}
 
 				if [[ -z "$output" ]]; then
@@ -86,19 +84,19 @@ else
 						output+="\n"
 					fi
 				fi
-				#echo "Original $message"
-				#echo "Quoted $message_quoted"
-				#echo
+				# >&2 echo "Original $message"
+				# >&2 echo "Quoted $message_quoted"
+				# >&2 echo
 				item="{\"type\":\"default\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"$code\", \"subtitle\": \"${message_date}: ${message_quoted}\", \"title\": \"$code\"}"
-				# echo $item
+				# >&2 echo $item
 				output+=$item
-				#echo "New output: $output"
+				# >&2 echo "New output: $output"
 
 				# Trim to the remaining message
-				# echo "REMATCH: ${BASH_REMATCH[0]}"
-				# echo "Before truncating message: $remaining_message"
+				# >&2 echo "REMATCH: ${BASH_REMATCH[0]}"
+				# >&2 echo "Before truncating message: $remaining_message"
 				remaining_message=${remaining_message##*${BASH_REMATCH[0]}}
-				# echo "Remaining message: $remaining_message"
+				# >&2 echo "Remaining message: $remaining_message"
 			done
 		else
 			>&2 echo "No match for $line"
