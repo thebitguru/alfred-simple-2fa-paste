@@ -25,6 +25,39 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with a system paste</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy text to clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -33,58 +66,86 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>07B293CF-39D7-4FB6-80F3-9D442F136C04</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>Copy the code and paste it into the active app with a system paste</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Farhan Ahmad</string>
 	<key>description</key>
-	<string>Find two-factor authentication codes in your recent iMessage messages</string>
+	<string>Find two-factor authentication codes in your recent Messages</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>2FA Code from Messages</string>
+	<string>Simple 2FA Paste</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Looking up two factor authentication codes...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get_codes.sh</string>
+				<key>subtext</key>
+				<string>Find two factor authentication codes in your messages</string>
+				<key>title</key>
+				<string>Two Factor Authentication Codes</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B2134B58-A76E-45E9-854A-503A1C378C34</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -122,165 +183,6 @@
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>2fa</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Looking up two factor authentication codes...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get_codes.sh</string>
-				<key>subtext</key>
-				<string>Find two factor authentication codes in your messages</string>
-				<key>title</key>
-				<string>Two Factor Authentication Codes</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>B2134B58-A76E-45E9-854A-503A1C378C34</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string># THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly remote_info_plist='https://raw.githubusercontent.com/thebitguru/alfred-imessage-2fa-copy/master/info.plist'
-readonly workflow_url='thebitguru/alfred-imessage-2fa-copy'
-readonly download_type='github_release'
-readonly frequency_check='5'
-
-# FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
-function abort {
-  echo "${1}" &gt;&amp;2
-  exit 1
-}
-
-function url_exists {
-  curl --silent --location --output /dev/null --fail --range 0-0 "${1}"
-}
-
-function notification {
-  local -r notificator="$(find . -type d -name 'Notificator.app')"
-  if [[ -n "${notificator}" ]]; then
-    "${notificator}/Contents/Resources/Scripts/notificator" --message "${1}" --title "${alfred_workflow_name}" --subtitle 'A new version is available'
-    return
-  fi
-
-  local -r terminal_notifier="$(find . -type f -name 'terminal-notifier')"
-  if [[ -n "${terminal_notifier}" ]]; then
-    "${terminal_notifier}" -title "${alfred_workflow_name}" -subtitle 'A new version is available' -message "${1}"
-    return
-  fi
-
-  osascript -e "display notification \"${1}\" with title \"${alfred_workflow_name}\" subtitle \"A new version is available\""
-}
-
-# Local sanity checks
-readonly local_info_plist='info.plist'
-readonly local_version="$(/usr/libexec/PlistBuddy -c 'print version' "${local_info_plist}")"
-
-[[ -n "${local_version}" ]] || abort 'You need to set a workflow version in the configuration sheet.'
-[[ "${download_type}" =~ ^(direct|page|github_release)$ ]] || abort "'download_type' (${download_type}) needs to be one of 'direct', 'page', or 'github_release'."
-[[ "${frequency_check}" =~ ^[0-9]+$ ]] || abort "'frequency_check' (${frequency_check}) needs to be a number."
-
-# Check for updates
-if [[ $(find "${local_info_plist}" -mtime +"${frequency_check}"d) ]]; then
-  if ! url_exists "${remote_info_plist}"; then abort "'remote_info_plist' (${remote_info_plist}) appears to not be reachable."; fi # Remote sanity check
-
-  readonly tmp_file="$(mktemp)"
-  curl --silent --location --output "${tmp_file}" "${remote_info_plist}"
-  readonly remote_version="$(/usr/libexec/PlistBuddy -c 'print version' "${tmp_file}")"
-
-  if [[ "${local_version}" == "${remote_version}" ]]; then
-    touch "${local_info_plist}" # Reset timer by touching local file
-    exit 0
-  fi
-
-  if [[ "${download_type}" == 'page' ]]; then
-    notification 'Opening download page…'
-    open "${workflow_url}"
-    exit 0
-  fi
-
-  download_url="$([[ "${download_type}" == 'github_release' ]] &amp;&amp; curl --silent "https://api.github.com/repos/${workflow_url}/releases/latest" | grep 'browser_download_url' | head -1 | sed -E 's/.*browser_download_url": "(.*)"/\1/' || echo "${workflow_url}")"
-
-  if url_exists "${download_url}"; then
-    notification 'Downloading and installing…'
-    curl --silent --location --output "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow" "${download_url}"
-    open "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow"
-  else
-    abort "'workflow_url' (${download_url}) appears to not be reachable."
-  fi
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>07B293CF-39D7-4FB6-80F3-9D442F136C04</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -328,77 +230,112 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Icon made by www.flaticon.com/authors/freepik from www.flaticon.com.</string>
+	<string># Simple 2FA Paste
+Search Apple Messages for two-factor authentication codes and easily paste them in any app
+
+macOS supports [autofilling security codes sent to your iPhone](https://support.apple.com/guide/safari/autofill-security-codes-from-your-iphone-ibrwa4a6c6c6/mac). This is a great feature if you are using Safari, but it is not supported in other browsers (e.g., Chrome) and apps (e.g., an Electron app). This Alfred workflow adds this feature across the system.
+	--
+	Icon made by www.flaticon.com/authors/freepik from www.flaticon.com.
+	</string>
 	<key>uidata</key>
 	<dict>
-		<key>07B293CF-39D7-4FB6-80F3-9D442F136C04</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>note</key>
-			<string>OneUpdater</string>
-			<key>xpos</key>
-			<integer>620</integer>
-			<key>ypos</key>
-			<integer>255</integer>
-		</dict>
 		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
 		<dict>
 			<key>note</key>
-			<string>Method 1: AppleScript paste to simulate keystrokes</string>
+			<string>Method 2: AppleScript paste to simulate keystrokes</string>
 			<key>xpos</key>
-			<integer>60</integer>
+			<real>425</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>330</real>
 		</dict>
 		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
 		<dict>
 			<key>xpos</key>
-			<integer>60</integer>
+			<real>60</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>CEBD08AD-93B2-4317-939A-49E805C90AA1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>605</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>185</real>
 		</dict>
 		<key>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</key>
 		<dict>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>605</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>330</real>
 		</dict>
 		<key>E819A847-A36C-4867-AACD-CFFCFB59B5A9</key>
 		<dict>
 			<key>note</key>
-			<string>Method 2: Alfred paste</string>
+			<string>Default Method: Alfred paste</string>
 			<key>xpos</key>
-			<integer>465</integer>
+			<real>425</real>
 			<key>ypos</key>
-			<integer>425</integer>
+			<real>25</real>
 		</dict>
 		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
 		<dict>
 			<key>note</key>
 			<string>Only copy to clipboard</string>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>425</real>
 			<key>ypos</key>
-			<integer>120</integer>
+			<real>185</real>
 		</dict>
 	</dict>
-	<key>variables</key>
-	<dict>
-		<key>lookBackMinutes</key>
-		<string>720</string>
-	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2fa</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword you would like to use to start searching your message</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>240</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>How many minutes to look back for messages with two factor authentication codes.</string>
+			<key>label</key>
+			<string>Minutes to look back</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>lookBackMinutes</string>
+		</dict>
+	</array>
 	<key>version</key>
-	<string>0.5</string>
+	<string>0.6</string>
 	<key>webaddress</key>
-	<string>https://github.com/thebitguru/alfred-imessage-2fa-copy</string>
+	<string>https://github.com/thebitguru/alfred-simple-2fa-paste</string>
 </dict>
 </plist>

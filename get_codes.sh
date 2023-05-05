@@ -10,14 +10,22 @@ ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)
 
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
+function debug_text() {
+	if [[ $alfred_debug == "1" ]]; then
+		>&2 echo $1
+	fi
+}
+
 output=''
 lookBackMinutes=${lookBackMinutes:-15}
+
+debug_text "Lookback minutes: $lookBackMinutes"
 
 if [[ "$1" == "--test" ]]; then
 	echo "Running in test mode."
 	response=`cat test_messages.txt`
 else
-	# >&2 echo "Lookback minutes: $lookBackMinutes"
+	debug_text "Lookback minutes: $lookBackMinutes"
 
 	sqlQuery="select
 		message.rowid,
@@ -48,10 +56,10 @@ else
 	order by
 		message.date desc
 	limit 10;"
-	# >&2 echo "SQL Query: $sqlQuery"
+	debug_text "SQL Query: $sqlQuery"
 
 	response=$(sqlite3 ~/Library/Messages/chat.db -json "$sqlQuery")
-	# >&2 echo "SQL Results: '$response'"
+	debug_text "SQL Results: '$response'"
 fi
 
 
@@ -59,21 +67,21 @@ if [[ -z "$response" ]]; then
 	output+="{\"items\":[{\"type\":\"default\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"\", \"subtitle\": \"Searched messages in the last $lookBackMinutes minutes.\", \"title\": \"No codes found\"}]}"
 else
 	while read line; do
-		#>&2 echo "Line: $line"
+		debug_text "Line: $line"
 		if [[ $line =~ $ROW_REGEX ]]; then
 		 	sender=${BASH_REMATCH[2]}
 			message_date=${BASH_REMATCH[4]}
 			message=${BASH_REMATCH[5]}
-			#>&2 echo " Found sender: $sender"
-			#>&2 echo " Found message_date: $message_date"
-			#>&2 echo " Found message: $message"
+			debug_text " Found sender: $sender"
+			debug_text " Found message_date: $message_date"
+			debug_text " Found message: $message"
 
 			remaining_message=$message
 			message_quoted=${message//[\"]/\\\"}
 
 			while [[ $remaining_message =~ $NUMBER_MATCH_REGEX ]]; do
-				# >&2 echo " -- Message: $message"
-				# >&2 echo " -- Found-1 ${BASH_REMATCH[1]}"
+				debug_text " -- Message: $message"
+				debug_text " -- Found-1 ${BASH_REMATCH[1]}"
 				code=${BASH_REMATCH[1]}
 
 				if [[ -z "$output" ]]; then
@@ -107,5 +115,5 @@ else
 	output+=']}'
 fi
 
-# >&2 echo "Final Output: '$output'"
+debug_text "Final Output: '$output'"
 echo -e $output

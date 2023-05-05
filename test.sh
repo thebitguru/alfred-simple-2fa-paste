@@ -59,7 +59,7 @@ while [[ $valid_response_index -lt ${#valid_responses[@]} ]]; do
 done
 
 if [[ ($failures -eq 0) && ($errors -eq 0) ]]; then
-    printf "\033[0;32mTest completed successfully.\n"
+    printf "\033[0;32mTests completed successfully.\n"
 else
     printf "\033[0;31m$failures failures, $errors errors.\n"
 fi
