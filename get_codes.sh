@@ -10,6 +10,7 @@ ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)
 
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
+# Print the first argument if in Alfred debug mode.
 function debug_text() {
 	if [[ $alfred_debug == "1" ]]; then
 		>&2 echo $1
@@ -31,7 +32,7 @@ else
 		message.rowid,
 		ifnull(handle.uncanonicalized_id, chat.chat_identifier) AS sender,
 		message.service,
-		datetime(message.date / 1000000000 + 978307200, 'unixepoch', 'localtime') AS message_date,
+		datetime(message.date / 1000000000 + strftime('%s', '2001-01-01'), 'unixepoch', 'localtime') AS message_date,
 		message.text
 	from
 		message
@@ -51,14 +52,14 @@ else
 			or message.text glob '*[0-9][0-9][0-9][0-9][0-9][0-9][0-9]*'
 			or message.text glob '*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*'
 		)
-		-- and datetime(message.date / 1000000000 + strftime('%s', '2001-01-01'), 'unixepoch', 'localtime')
-		--         >= datetime('now', '-$lookBackMinutes minutes', 'localtime')
+		  and datetime(message.date / 1000000000 + strftime('%s', '2001-01-01'), 'unixepoch', 'localtime')
+		          >= datetime('now', '-$lookBackMinutes minutes', 'localtime')
 	order by
 		message.date desc
 	limit 10;"
 	debug_text "SQL Query: $sqlQuery"
 
-	response=$(sqlite3 ~/Library/Messages/chat.db -json "$sqlQuery")
+	response=$(sqlite3 ~/Library/Messages/chat.db -json "$sqlQuery" ".exit")
 	debug_text "SQL Results: '$response'"
 fi
 
