@@ -24,7 +24,7 @@ jobs:
       - name: Create the alfredworkflow zip file
         uses: TheDoctor0/zip-release@0.6.1
         with:
-          filename: alfred-imessage-2fa-copy.alfredworkflow
+          filename: alfred-simple-2fa-paste.alfredworkflow
           # optional, default is .
           path: .
           directory: .
@@ -35,6 +35,6 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "alfred-imessage-2fa-copy.alfredworkflow"
+          artifacts: "alfred-simple-2fa-paste.alfredworkflow"
           bodyFile: "release_notes.md"
           token: ${{ secrets.GITHUB_TOKEN }}
