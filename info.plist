@@ -231,12 +231,22 @@
 	</array>
 	<key>readme</key>
 	<string># Simple 2FA Paste
-Search Apple Messages for two-factor authentication codes and easily paste them in any app
+Search Apple Messages for two-factor authentication codes and easily paste them in any app.
 
 macOS supports [autofilling security codes sent to your iPhone](https://support.apple.com/guide/safari/autofill-security-codes-from-your-iphone-ibrwa4a6c6c6/mac). This is a great feature if you are using Safari, but it is not supported in other browsers (e.g., Chrome) and apps (e.g., an Electron app). This Alfred workflow adds this feature across the system.
-	--
-	Icon made by www.flaticon.com/authors/freepik from www.flaticon.com.
-	</string>
+
+![Results](screenshot.png)
+
+## Usage
+
+1. Launch Alfred.
+2. Enter the configured keyword (`2fa` by default).
+3. Select the correct two-factor code if it isn't the first one. You can also use shortcuts like Command+2 or Command+3 to select and paste in a single go.
+4. If you did not use Command+2, or another number, shortcut then press enter to paste in the currently active text field.
+
+---
+
+Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com.</string>
 	<key>uidata</key>
 	<dict>
 		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
