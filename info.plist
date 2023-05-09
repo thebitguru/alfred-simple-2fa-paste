@@ -334,7 +334,7 @@ macOS supports [autofilling security codes sent to your iPhone](https://support.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.6</string>
+	<string>0.7</string>
 	<key>webaddress</key>
 	<string>https://github.com/thebitguru/alfred-simple-2fa-paste</string>
 </dict>

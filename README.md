@@ -2,7 +2,7 @@
 
 macOS supports [autofilling security codes sent to your iPhone](https://support.apple.com/guide/safari/autofill-security-codes-from-your-iphone-ibrwa4a6c6c6/mac). This is a great feature if you are using Safari, but it is not supported in other browsers (e.g., Chrome) and apps (e.g., an Electron app). This Alfred workflow adds this feature across the system.
 
-[Install from Alfred Gallery](https://alfred.app/workflows/thebitguru/alfred-simple-2fa-paste/)
+[Install from Alfred Gallery](https://alfred.app/workflows/thebitguru/simple-2fa-paste/)
 
 ---
 
