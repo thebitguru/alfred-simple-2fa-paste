@@ -1,1 +1,1 @@
-Small fix to not allow selecting when no results are returned
+Make readme more explanatory
