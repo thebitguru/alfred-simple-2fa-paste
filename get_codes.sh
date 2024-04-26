@@ -86,7 +86,7 @@ else
 				code=${BASH_REMATCH[1]}
 
 				if [[ -z "$output" ]]; then
-					output='{"items":['
+					output='{"rerun": 1, "items":['
 				else
 					output+=','
 					if [[ "$2" == "--newline" ]]; then
