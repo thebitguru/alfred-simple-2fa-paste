@@ -95,7 +95,7 @@ fi
 
 
 if [[ -z "$response" ]]; then
-	output+="{\"items\":[{\"type\":\"default\", \"valid\": \"false\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"\", \"subtitle\": \"Searched messages in the last $lookBackMinutes minutes.\", \"title\": \"No codes found\"}]}"
+	output+="{\"rerun\": 1,\"items\":[{\"type\":\"default\", \"valid\": \"false\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"\", \"subtitle\": \"Searched messages in the last $lookBackMinutes minutes.\", \"title\": \"No codes found\"}]}"
 else
 	while read line; do
 		debug_text "Line: $line"
