@@ -19,13 +19,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
-        uses: actions/checkout@v3.0.0
+        uses: actions/checkout@v4
       
       - name: Run test
         run: ./test.sh
 
       - name: Report
-        uses: dorny/test-reporter@v1.6.0
+        uses: dorny/test-reporter@v1.9.0
         with:
           name: Test Results
           path: test_results.xml
