@@ -2,7 +2,7 @@
 
 # Tests the get_codes.sh script.
 
-response=`./get_codes.sh --test --newline`
+response=`./get_codes.sh --ignore-full-disk-check --test --newline`
 # echo $response
 
 # Convert the response to an array.

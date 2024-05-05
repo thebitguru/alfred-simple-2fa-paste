@@ -21,7 +21,7 @@ output=''
 lookBackMinutes=${lookBackMinutes:-15}
 
 # Check if alfred has full disk access.
-if [ ! -r ~/Library/Messages/chat.db ]; then
+if [[ "$1" != "--ignore-full-disk-check" && ! -r ~/Library/Messages/chat.db ]]; then
 	echo '{
 	  "items": [
 	    {
@@ -52,7 +52,7 @@ fi
 
 debug_text "Lookback minutes: $lookBackMinutes"
 
-if [[ "$1" == "--test" ]]; then
+if [[ "$2" == "--test" ]]; then
 	echo "Running in test mode."
 	response=`cat test_messages.txt`
 else
@@ -119,7 +119,7 @@ else
 					output='{"rerun": 1, "items":['
 				else
 					output+=','
-					if [[ "$2" == "--newline" ]]; then
+					if [[ "$3" == "--newline" ]]; then
 						output+="\n"
 					fi
 				fi
