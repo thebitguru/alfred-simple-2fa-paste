@@ -17,9 +17,9 @@ macOS supports [autofilling security codes sent to your iPhone](https://support.
 
 ---
 
-## Inspiration
+## Derivative
 
-This workflow builds upon https://github.com/squatto/alfred-imessage-2fa. One of the major differences is that this workflow uses simple `bash` instead of `php`, thus eliminating the need for any more than what your system already has.
+This workflow builds upon https://github.com/squatto/alfred-imessage-2fa. One of the major differences is that this workflow uses simple `bash` instead of `php`, thus eliminating the need for anything more than what your system already has.
 
 [![Run tests](https://github.com/thebitguru/alfred-imessage-2fa-copy/actions/workflows/test.yml/badge.svg)](https://github.com/thebitguru/alfred-imessage-2fa-copy/actions/workflows/test.yml)
 

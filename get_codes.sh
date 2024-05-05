@@ -20,6 +20,36 @@ function debug_text() {
 output=''
 lookBackMinutes=${lookBackMinutes:-15}
 
+# Check if alfred has full disk access.
+if [ ! -r ~/Library/Messages/chat.db ]; then
+	echo '{
+	  "items": [
+	    {
+	      "type": "default",
+	      "valid": true,
+	      "icon": {"path": "icon.png"},
+	      "subtitle": "Launch System Preferences and turn this on.",
+	      "title": "Full Disk Access Required for Alfred",
+		  "variables": {
+			"launch_full_disk": 1
+		  }
+	    },
+	    {
+	      "type": "default",
+	      "valid": true,
+	      "icon": {"path": "icon.png"},
+	      "subtitle": "See a short explanation of why full disk access is required.",
+	      "title": "Why is full disk access required?",
+		  "variables": {
+			"launch_url": 1,
+			"url": "https://github.com/thebitguru/alfred-simple-2fa-paste/wiki/Full-Disk-Access"
+		  }
+	    }
+	  ]
+	}'
+	exit 1
+fi
+
 debug_text "Lookback minutes: $lookBackMinutes"
 
 if [[ "$1" == "--test" ]]; then

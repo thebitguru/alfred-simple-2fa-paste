@@ -8,6 +8,43 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>31D70B97-EB99-436E-8B0C-408022D72188</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F7480215-8792-4238-AC62-D1F956AFB77E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>1639AFC9-1CE9-4844-9529-7BC40BEBE85A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6C6E3B44-94F6-4B91-B5FF-77B5F43EB4D5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>FF475C83-FA10-47D1-927F-6CC3A6A47212</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
 		<array>
 			<dict>
@@ -25,16 +62,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string>Copy the code and paste it into the active app with a system paste</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -50,6 +77,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>31D70B97-EB99-436E-8B0C-408022D72188</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -82,7 +119,7 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<true/>
+				<false/>
 				<key>clipboardtext</key>
 				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -93,9 +130,30 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+			<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{query}' copied to clipboard</string>
+				<key>title</key>
+				<string>Code copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -149,46 +207,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{query}' copied to clipboard</string>
-				<key>title</key>
-				<string>Code copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -228,6 +246,113 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F7480215-8792-4238-AC62-D1F956AFB77E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:launch_url}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Launch URL</string>
+						<key>uid</key>
+						<string>1639AFC9-1CE9-4844-9529-7BC40BEBE85A</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:launch_full_disk}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Launch Full Disk Access</string>
+						<key>uid</key>
+						<string>FF475C83-FA10-47D1-927F-6CC3A6A47212</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>31D70B97-EB99-436E-8B0C-408022D72188</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6C6E3B44-94F6-4B91-B5FF-77B5F43EB4D5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Simple 2FA Paste
@@ -249,6 +374,20 @@ macOS supports [autofilling security codes sent to your iPhone](https://support.
 Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com.</string>
 	<key>uidata</key>
 	<dict>
+		<key>31D70B97-EB99-436E-8B0C-408022D72188</key>
+		<dict>
+			<key>xpos</key>
+			<real>355</real>
+			<key>ypos</key>
+			<real>425</real>
+		</dict>
+		<key>6C6E3B44-94F6-4B91-B5FF-77B5F43EB4D5</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
 		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
 		<dict>
 			<key>note</key>
@@ -256,7 +395,7 @@ Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/fre
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>185</real>
 		</dict>
 		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
 		<dict>
@@ -270,23 +409,23 @@ Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/fre
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>40</real>
 		</dict>
 		<key>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</key>
 		<dict>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>185</real>
 		</dict>
 		<key>E819A847-A36C-4867-AACD-CFFCFB59B5A9</key>
 		<dict>
 			<key>note</key>
 			<string>Default Method: Alfred paste</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>630</real>
 		</dict>
 		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
 		<dict>
@@ -295,7 +434,14 @@ Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/fre
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>40</real>
+		</dict>
+		<key>F7480215-8792-4238-AC62-D1F956AFB77E</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>390</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -344,7 +490,7 @@ Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/fre
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.8</string>
+	<string>1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/thebitguru/alfred-simple-2fa-paste</string>
 </dict>
