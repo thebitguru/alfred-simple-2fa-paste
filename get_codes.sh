@@ -11,9 +11,10 @@ ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
 # Print the first argument if in Alfred debug mode.
+alfred_debug=${alfred_debug:-0}
 function debug_text() {
 	if [[ $alfred_debug == "1" ]]; then
-		>&2 echo $1
+		>&2 echo "$1"
 	fi
 }
 
@@ -54,7 +55,7 @@ debug_text "Lookback minutes: $lookBackMinutes"
 
 if [[ "$2" == "--test" ]]; then
 	echo "Running in test mode."
-	response=`cat test_messages.txt`
+	response=$(cat test_messages.txt)
 else
 	debug_text "Lookback minutes: $lookBackMinutes"
 
@@ -99,17 +100,17 @@ if [[ -z "$response" ]]; then
 		"rerun": 1,
 		"items": [
 			{
-				"type": "default", 
-				"valid": "false", 
-				"icon": {"path": "icon.png"}, 
-				"arg": "", 
-				"subtitle": "Searched messages in the last '"$lookBackMinutes"' minutes.", 
+				"type": "default",
+				"valid": "false",
+				"icon": {"path": "icon.png"},
+				"arg": "",
+				"subtitle": "Searched messages in the last '"$lookBackMinutes"' minutes.",
 				"title": "No codes found"
 			}
 		]
 	}'
 else
-	while read line; do
+	while read -r line; do
 		debug_text "Line: $line"
 		if [[ $line =~ $ROW_REGEX ]]; then
 		 	sender=${BASH_REMATCH[2]}
@@ -146,7 +147,7 @@ else
 				# Trim to the remaining message
 				# >&2 echo "REMATCH: ${BASH_REMATCH[0]}"
 				# >&2 echo "Before truncating message: $remaining_message"
-				remaining_message=${remaining_message##*${BASH_REMATCH[0]}}
+				remaining_message=${remaining_message##*"${BASH_REMATCH[0]}"}
 				# >&2 echo "Remaining message: $remaining_message"
 			done
 		else
@@ -159,4 +160,4 @@ else
 fi
 
 debug_text "Final Output: '$output'"
-echo -e $output
+echo -e "$output"
