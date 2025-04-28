@@ -10,8 +10,9 @@ ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)
 
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
-# Print the first argument if in Alfred debug mode.
 alfred_debug=${alfred_debug:-0}
+
+# Print the first argument if in Alfred debug mode.
 function debug_text() {
 	if [[ $alfred_debug == "1" ]]; then
 		>&2 echo "$1"
@@ -110,7 +111,7 @@ if [[ -z "$response" ]]; then
 		]
 	}'
 else
-	while read -r line; do
+	while read line; do
 		debug_text "Line: $line"
 		if [[ $line =~ $ROW_REGEX ]]; then
 		 	sender=${BASH_REMATCH[2]}
