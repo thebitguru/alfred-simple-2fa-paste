@@ -7,10 +7,10 @@ response=`./get_codes.sh --ignore-full-disk-check --test --newline`
 
 # Convert the response to an array.
 IFS=$'\n'
-received_responses=("$response")
+received_responses=($response)
 
 valid_results=`cat test_messages_results.txt`
-valid_responses=("$valid_results")
+valid_responses=($valid_results)
 
 valid_response_index=0
 received_response_index=1  # Ignore first line ("Running in test mode.")
