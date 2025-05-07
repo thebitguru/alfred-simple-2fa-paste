@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+alfred_debug="${alfred_debug:-0}"
+
 # Usage
 #  get_codes.sh [--test] [--newline]
 #     --test: Run the script in test mode.
 #     --newline: Print a newline after the output.
 #  To keep the script simple, the arguments are expected to be in these exact positions.
 
-ROW_REGEX='^\[?\{"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)","message_date"\:"([^"]+)","text"\:"([[:print:]][^\\]+)"\}.*$'
+ROW_REGEX='^\[?\{?"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)","message_date"\:"([^"]+)","text"\:"([[:print:]][^\\]+)"\}.*$'
 
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
@@ -54,7 +56,9 @@ debug_text "Lookback minutes: $lookBackMinutes"
 
 if [[ "$2" == "--test" ]]; then
 	echo "Running in test mode."
-	response=`cat test_messages.txt`
+	response=$(cat test_messages.txt)
+	# Remove the outer array brackets and split into individual JSON objects
+	response=$(echo "$response" | sed 's/^\[//;s/\]$//' | sed 's/},{/}\n{/g')
 else
 	debug_text "Lookback minutes: $lookBackMinutes"
 
@@ -99,20 +103,20 @@ if [[ -z "$response" ]]; then
 		"rerun": 1,
 		"items": [
 			{
-				"type": "default", 
-				"valid": "false", 
-				"icon": {"path": "icon.png"}, 
-				"arg": "", 
-				"subtitle": "Searched messages in the last '"$lookBackMinutes"' minutes.", 
+				"type": "default",
+				"valid": "false",
+				"icon": {"path": "icon.png"},
+				"arg": "",
+				"subtitle": "Searched messages in the last '"$lookBackMinutes"' minutes.",
 				"title": "No codes found"
 			}
 		]
 	}'
 else
-	while read line; do
+	while read -r line; do
 		debug_text "Line: $line"
 		if [[ $line =~ $ROW_REGEX ]]; then
-		 	sender=${BASH_REMATCH[2]}
+			sender=${BASH_REMATCH[2]}
 			message_date=${BASH_REMATCH[4]}
 			message=${BASH_REMATCH[5]}
 			debug_text " Found sender: $sender"
@@ -122,11 +126,16 @@ else
 			remaining_message=$message
 			message_quoted=${message//[\"]/\\\"}
 
+			# Extract all codes from the message first
+			codes=()
 			while [[ $remaining_message =~ $NUMBER_MATCH_REGEX ]]; do
-				debug_text " -- Message: $message"
-				debug_text " -- Found-1 ${BASH_REMATCH[1]}"
 				code=${BASH_REMATCH[1]}
+				codes+=("$code")
+				remaining_message=${remaining_message##*"${BASH_REMATCH[0]}"}
+			done
 
+			# Add codes to output in order
+			for code in "${codes[@]}"; do
 				if [[ -z "$output" ]]; then
 					output='{"rerun": 1, "items":['
 				else
@@ -135,25 +144,12 @@ else
 						output+="\n"
 					fi
 				fi
-				# >&2 echo "Original $message"
-				# >&2 echo "Quoted $message_quoted"
-				# >&2 echo
 				item="{\"type\":\"default\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"$code\", \"subtitle\": \"${message_date}: ${message_quoted}\", \"title\": \"$code\"}"
-				# >&2 echo $item
 				output+=$item
-				# >&2 echo "New output: $output"
-
-				# Trim to the remaining message
-				# >&2 echo "REMATCH: ${BASH_REMATCH[0]}"
-				# >&2 echo "Before truncating message: $remaining_message"
-				remaining_message=${remaining_message##*${BASH_REMATCH[0]}}
-				# >&2 echo "Remaining message: $remaining_message"
 			done
 		else
 			>&2 echo "No match for $line"
 		fi
-
-		continue
 	done <<< "$response"
 	output+=']}'
 fi
