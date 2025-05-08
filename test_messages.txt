@@ -21,5 +21,8 @@
 {"ROWID":64886,"sender":"242733","service":"SMS","message_date":"2022-03-01 17:38:04","text":"Your Stripe verification code is: 719-839."},
 {"ROWID":64885,"sender":"242733","service":"SMS","message_date":"2022-03-01 17:34:28","text":"Chase: You're signing in with a new device.\nUse requested code 48939624 online or in our app to sign in.\nWe'll NEVER call to ask for it."},
 {"ROWID":64886,"sender":"242733","service":"SMS","message_date":"2022-03-01 17:38:04","text":"This example has multiple codes: 719-839 485279."},
-{"ROWID":25307,"sender":"6086204443","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \"special\" ' [ ] { } characters 12314708"},
-{"ROWID":25307,"sender":"6086204443","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \",\" ' [ ] { } characters 22314710"}]
+{"ROWID":25307,"sender":"6086204447","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \"special\" ' [ ] { } characters 12314708"},
+{"ROWID":25307,"sender":"6086204443","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \",\" ' [ ] { } characters and no code",
+{"ROWID":25307,"sender":"6086204443","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \",\" ' [ ] { } characters and no code"},
+{"ROWID":25307,"sender":"6086204447","service":"SMS","message_date":"2022-03-15 21:54:44","text":"Testing with other \",\" ' [ ] { } characters 22314710"}]
+[{"ROWID":91359,"sender":"64241","service":"SMS","message_date":"2025-05-08 09:09:48","text":"Your Apple Account Code is: 774648. Don't share it with anyone.\r\n@apple.com #774648 %apple.com"}]
