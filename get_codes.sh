@@ -8,18 +8,33 @@ alfred_debug="${alfred_debug:-0}"
 #     --newline: Print a newline after the output.
 #  To keep the script simple, the arguments are expected to be in these exact positions.
 
-ROW_REGEX='^\[?\{?"ROWID"\:([[:digit:]]+),"sender"\:"([^"]+)","service"\:"([^"]+)","message_date"\:"([^"]+)","text"\:"([[:print:]][^\\]+)"\}.*$'
+ROW_REGEX='\{"ROWID":([[:digit:]]+),"sender":"([^"]+)","service":"([^"]+)","message_date":"([^"]+)","text":"(.+)"\}'
 
 NUMBER_MATCH_REGEX='([G[:digit:]-]{3,})'
 
 # Print the first argument if in Alfred debug mode.
 function debug_text() {
+	# echo >&2 "debug_text: $1"
 	if [[ $alfred_debug == "1" ]]; then
 		>&2 echo "$1"
 	fi
 }
 
+function append_output() {
+	local item="$1"
+	if [[ -z "$output" ]]; then
+		output='{"rerun": 1, "items":['
+	else
+		output+=','
+		if [[ "$add_newline" == "--newline" ]]; then
+			output+="\n"
+		fi
+	fi
+	output+="$item"
+}
+
 output=''
+add_newline="${3:-}"
 lookBackMinutes=${lookBackMinutes:-15}
 
 # Check if alfred has full disk access.
@@ -54,8 +69,10 @@ fi
 
 debug_text "Lookback minutes: $lookBackMinutes"
 
+test_mode=0
 if [[ "$2" == "--test" ]]; then
 	echo "Running in test mode."
+	test_mode=1
 	response=$(cat test_messages.txt)
 	# Remove the outer array brackets and split into individual JSON objects
 	response=$(echo "$response" | sed 's/^\[//;s/\]$//' | sed 's/},{/}\n{/g')
@@ -124,31 +141,32 @@ else
 			debug_text " Found message: $message"
 
 			remaining_message=$message
-			message_quoted=${message//[\"]/\\\"}
+			message_quoted=${message//'\r'/ }
+			message_quoted=${message_quoted//'\n'/ }
+			message_quoted=${message_quoted//[\"]/\\\"}
 
 			# Extract all codes from the message first
 			codes=()
 			while [[ $remaining_message =~ $NUMBER_MATCH_REGEX ]]; do
 				code=${BASH_REMATCH[1]}
+				debug_text " Found code: $code"
 				codes+=("$code")
 				remaining_message=${remaining_message##*"${BASH_REMATCH[0]}"}
 			done
 
 			# Add codes to output in order
 			for code in "${codes[@]}"; do
-				if [[ -z "$output" ]]; then
-					output='{"rerun": 1, "items":['
-				else
-					output+=','
-					if [[ "$3" == "--newline" ]]; then
-						output+="\n"
-					fi
-				fi
 				item="{\"type\":\"default\", \"icon\": {\"path\": \"icon.png\"}, \"arg\": \"$code\", \"subtitle\": \"${message_date}: ${message_quoted}\", \"title\": \"$code\"}"
-				output+=$item
+				append_output "$item"
 			done
+
+			if [[ "$test_mode" == "1" && ${#codes[@]} -eq 0 ]]; then
+				append_output "{\"arg\": \"noCodesFound\"}"
+			fi
 		else
-			>&2 echo "No match for $line"
+			if [[ "$test_mode" == "1" ]]; then
+				append_output "{\"arg\": \"rowNotFound\"}"
+			fi
 		fi
 	done <<< "$response"
 	output+=']}'

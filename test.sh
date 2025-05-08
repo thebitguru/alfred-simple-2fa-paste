@@ -23,41 +23,59 @@ test_results=""
 failures=0
 errors=0
 
-# Sort both arrays to ensure consistent ordering
-mapfile -t sorted_received < <(printf '%s\n' "${received_responses[@]}" | sort)
-mapfile -t sorted_valid < <(printf '%s\n' "${valid_responses[@]}" | sort)
+if [[ ${#valid_responses[@]} -ne ${#received_responses[@]} ]]; then
+    printf "Expected %d responses, but received %d\n" "${#valid_responses[@]}" "${#received_responses[@]}"
+    test_results+="<testcase classname=\"get_codes.sh\" name=\"count\" time=\"0\">
+        <failure message=\"count mismatch\" type=\"countMismatch\">Expected ${#valid_responses[@]} responses, but received ${#received_responses[@]}</failure>
+        </testcase>\n"
+    errors+=1
+else
+    for i in "${!valid_responses[@]}"; do
+        valid_response=${valid_responses[$i]}
+        received_response=${received_responses[$i]:-""}
 
-# Compare sorted arrays
-for i in "${!sorted_valid[@]}"; do
-    valid_response=${sorted_valid[$i]}
-    received_response=${sorted_received[$i]:-""}
-
-    if [[ -z "$received_response" ]]; then
-        message="Could not find response for expected code: '$valid_response'"
-        escaped=${message//</&lt;}
-        escaped=${escaped//&/&amp;}
-        escaped=${escaped//>/&gt;}
-        escaped=${escaped//\"/&quot;}
-        test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\">
-            <failure message=\"missing response\" type=\"missingResponse\">$escaped</failure>
-            </testcase>\n"
-        printf "%d: \xE2\x9D\x8C %s\n" "$i" "$message"
-        ((errors++))
-    elif [[ "$valid_response" != "$received_response" ]]; then
-        escaped=${received_response//</&lt;}
-        escaped=${escaped//&/&amp;}
-        escaped=${escaped//>/&gt;}
-        escaped=${escaped//\"/&quot;}
-        test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\">
-            <failure message=\"invalid code\" type=\"invalidCode\">Expected '$valid_response', but received '$received_response'</failure>
-            </testcase>\n"
-        printf "%d: \xE2\x9D\x8C %s != %s\n" "$i" "$valid_response" "$received_response"
-        ((failures++))
-    else
-        test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\" />\n"
-        printf "%d: \xE2\x9C\x85 %s = %s\n" "$i" "$valid_response" "$received_response"
-    fi
-done
+        if [[ -z "$received_response" ]]; then
+            message="Could not find response for expected code: '$valid_response'"
+            escaped=${message//</&lt;}
+            escaped=${escaped//&/&amp;}
+            escaped=${escaped//>/&gt;}
+            escaped=${escaped//\"/&quot;}
+            printf "Expecting '$valid_response' but received '$received_response'\n"
+            # If the expected response is "SHOULD NOT FIND ANYTHING", then the test is successful.
+            if [[ "$valid_response" == "SHOULD NOT FIND ANYTHING" ]]; then
+                printf "Expected no response, but received '$received_response'"
+                test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\">
+                    <failure message=\"got response when expected none\" type=\"gotResponseWhenExpectedNone\">$escaped</failure>
+                    </testcase>\n"
+                printf "%d: \xE2\x9C\x85 %s = %s\n" "$i" "$valid_response" "$received_response"
+            else
+                message="Could not find response for expected code: '$valid_response'"
+                escaped=${message//</&lt;}
+                escaped=${escaped//&/&amp;}
+                escaped=${escaped//>/&gt;}
+                escaped=${escaped//\"/&quot;}
+                test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\">
+                    <failure message=\"missing response\" type=\"missingResponse\">$escaped</failure>
+                    </testcase>\n"
+                printf "%d: \xE2\x9D\x8C %s\n" "$i" "$message"
+                ((errors++))
+            fi
+        elif [[ "$valid_response" != "$received_response" ]]; then
+            escaped=${received_response//</&lt;}
+            escaped=${escaped//&/&amp;}
+            escaped=${escaped//>/&gt;}
+            escaped=${escaped//\"/&quot;}
+            test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\">
+                <failure message=\"invalid code\" type=\"invalidCode\">Expected '$valid_response', but received '$received_response'</failure>
+                </testcase>\n"
+            printf "%d: \xE2\x9D\x8C %s != %s\n" "$i" "$valid_response" "$received_response"
+            ((failures++))
+        else
+            test_results+="<testcase classname=\"get_codes.sh\" name=\"line$i\" time=\"0\" />\n"
+            printf "%d: \xE2\x9C\x85 %s = %s\n" "$i" "$valid_response" "$received_response"
+        fi
+    done
+fi
 
 if [[ ($failures -eq 0) && ($errors -eq 0) ]]; then
     printf "\033[0;32mTests completed successfully.\n"
