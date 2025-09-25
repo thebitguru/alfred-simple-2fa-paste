@@ -1,3 +1,8 @@
+> **⚠️ Deprecation Notice**
+>
+> This workflow is **deprecated as of September 2025**. With the release of **macOS Tahoe**, [this functionality is now built into the operating system](https://www.macrumors.com/2025/06/12/ios-26-macos-tahoe-expand-one-time-code-autofill/) and no longer requires a separate Alfred workflow.
+
+
 # Search Apple Messages for two-factor authentication codes and easily paste them in any app
 
 macOS supports [autofilling security codes sent to your iPhone](https://support.apple.com/guide/safari/autofill-security-codes-from-your-iphone-ibrwa4a6c6c6/mac). This is a great feature if you are using Safari, but it is not supported in other browsers (e.g., Chrome) and apps (e.g., an Electron app). This Alfred workflow adds this feature across the system.
